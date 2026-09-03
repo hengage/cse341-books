@@ -7,10 +7,13 @@ const connectToDb = async () => {
   if (!connectionString) {
     throw new Error('MONGODB_URI is required.');
   }
+  if (!process.env.MONGODB_DB_NAME) {
+    throw new Error('MONGODB_DB_NAME is required.');
+  }
 
   const client = new MongoClient(connectionString);
   await client.connect();
-  database = client.db(process.env.MONGODB_DB_NAME || 'cse341-books-db');
+  database = client.db(process.env.MONGODB_DB_NAME);
   return database;
 };
 
