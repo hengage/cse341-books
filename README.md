@@ -2,6 +2,10 @@
 
 Week 01 Books API for CSE 341. The API uses Express and MongoDB and exposes two read-only routes.
 
+## Deployed Application
+
+- [Books API](https://cse341-books-6c7e.onrender.com/)
+
 ## Routes
 
 - `GET /books` returns all books with status `200`.
