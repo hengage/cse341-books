@@ -1,14 +1,23 @@
 import { getDb } from '../db/connect.js';
 
 const getAllBooks = async () => {
-  const books = await getDb().collection('books').find({}, {
-    projection: { _id: 0, id: 1, author: 1, title: 1, publicationDate: 1 }
-  }).toArray();
-  return books;
+  return getDb().collection('books').find().toArray();
 };
 
 const getBookById = async (bookId) => {
   return getDb().collection('books').findOne({ id: bookId });
 };
 
-export { getAllBooks, getBookById };
+const createBook = async (book) => {
+  return getDb().collection('books').insertOne(book);
+};
+
+const updateBook = async (bookId, updateFields) => {
+  return getDb().collection('books').updateOne({ id: bookId }, { $set: updateFields });
+};
+
+const deleteBook = async (bookId) => {
+  return getDb().collection('books').deleteOne({ id: bookId });
+};
+
+export { getAllBooks, getBookById, createBook, updateBook, deleteBook };
