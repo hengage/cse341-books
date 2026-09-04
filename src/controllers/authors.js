@@ -23,7 +23,18 @@ const getAuthorByIdHandler = async (request, response) => {
 
 const createAuthorHandler = async (request, response) => {
   try {
-    const newAuthor = request.body;
+    const { id, name, birthYear } = request.body;
+    if (!id || !name || !birthYear) {
+      return response.status(400).json({ message: 'Missing required fields: id, name, birthYear' });
+    }
+    
+    // Check if ID already exists
+    const existing = await getAuthorById(id);
+    if (existing) {
+      return response.status(400).json({ message: 'Author with this ID already exists' });
+    }
+
+    const newAuthor = { id, name, birthYear };
     await createAuthor(newAuthor);
     return response.status(201).json(newAuthor);
   } catch (error) {
@@ -33,9 +44,18 @@ const createAuthorHandler = async (request, response) => {
 
 const updateAuthorHandler = async (request, response) => {
   try {
-    const updatedAuthor = request.body;
-    await updateAuthor(request.params.id, updatedAuthor);
-    return response.status(200).json(updatedAuthor);
+    const { id, ...updateFields } = request.body; // Prevent updating ID
+    if (!updateFields.name || !updateFields.birthYear) {
+      return response.status(400).json({ message: 'Missing required fields: name, birthYear' });
+    }
+
+    const result = await updateAuthor(request.params.id, updateFields);
+    
+    if (result.matchedCount === 0) {
+      return response.status(404).json({ message: 'Author not found' });
+    }
+
+    return response.status(200).json({ id: request.params.id, ...updateFields });
   } catch (error) {
     return response.status(500).json({ message: 'Internal server error' });
   }
@@ -47,6 +67,11 @@ const deleteAuthorHandler = async (request, response) => {
     if (result.error) {
       return response.status(400).json({ message: result.error });
     }
+    
+    if (result.deletedCount === 0) {
+      return response.status(404).json({ message: 'Author not found' });
+    }
+    
     return response.status(204).send();
   } catch (error) {
     return response.status(500).json({ message: 'Internal server error' });

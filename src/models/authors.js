@@ -12,8 +12,8 @@ const createAuthor = async (author) => {
   return getDb().collection('authors').insertOne(author);
 };
 
-const updateAuthor = async (authorId, author) => {
-  return getDb().collection('authors').updateOne({ id: authorId }, { $set: author });
+const updateAuthor = async (authorId, updateFields) => {
+  return getDb().collection('authors').updateOne({ id: authorId }, { $set: updateFields });
 };
 
 const deleteAuthor = async (authorId) => {
