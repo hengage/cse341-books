@@ -5,8 +5,8 @@ const doc = {
     title: 'Books and Authors API',
     description: 'API for managing books and authors',
   },
-  host: 'localhost:3000',
-  schemes: ['http'],
+  host: '', // Empty host lets Swagger UI use the current page's host
+  schemes: ['https', 'http'],
 };
 
 const outputFile = './swagger.json';
