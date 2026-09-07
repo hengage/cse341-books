@@ -1,28 +1,33 @@
-Week 02 Reflection
+# Week 02 Reflection
 
-1. Include a link to one of your merged and closed GitHub pull requests.
-GitHub Pull Request Link: https://github.com/hengage/cse341-books/pull/13
+## Links
 
-2. Include a link to one of your closed GitHub issues.
-GitHub Issue Link: https://github.com/hengage/cse341-books/issues/8
+1. Provide your walk-through video link. This video must demonstrate your API working at Render and follow the script in the assignment.
+Video link: https://drive.google.com/file/d/1HjV1POBMJeN9afSBj9C1jRapujShAFXa/view?usp=drive_link
 
-3. Which issue took more or less time than expected? Why?
+2. Provide a link to your deployed Render api-docs URL:
+Render link: https://cse341-books-6c7e.onrender.com/api-docs/
+
+3. Provide links to your Pull Requests (they should be merged at this point):
+Books PR: https://github.com/hengage/cse341-books/pull/13
+Authors PR: https://github.com/hengage/cse341-books/pull/12
+
+4. Provide links to your GitHub Issues (they should be closed at this point).
+Books Issue: https://github.com/hengage/cse341-books/issues/9
+Authors Issue: https://github.com/hengage/cse341-books/issues/8
+
+## Plan vs. Implementation
+
+5. Which part of the work took more or less time than expected? Why?
+
 Answer: Issue #10 (Implement Swagger Documentation) took longer than expected because I ran into unexpected issues with dependency installation and needed to configure the swagger-autogen script properly to reflect the routes in my API.
 
-4. Include a link to your walk-through video. The video must include your name, show the hosted web service working, explain the get-single-book controller, and discuss status codes.
-Video Link: [PENDING: Record and add link]
+6. How did Swagger help you in your work this week?
 
-5.a. Include a GitHub link to a file that shows how your app uses sensitive data, such as the MongoDB connection string. Do not put the actual secret in GitHub.
-GitHub Link: https://github.com/hengage/cse341-books/blob/main/src/db/connect.js
+Answer: Swagger made testing the API endpoints incredibly easy by providing a visual, interactive interface. Instead of relying solely on command-line tools like `curl`, I could instantly execute requests, view status codes, and inspect responses directly from the browser, which significantly speeded up my development-to-verification loop.
 
-5.b. How did you store sensitive data? Why is that approach important?
-Answer: Sensitive data is stored in a local .env file which is excluded from version control via .gitignore. This is critical to prevent accidental exposure of database credentials in the public repository, maintaining security.
+## Week 03 Improvement
 
-6.a. Include a GitHub link to a file that shows one other implementation decision you made.
-GitHub Link: https://github.com/hengage/cse341-books/blob/main/src/constants.js
+7. What is one specific habit or process you will apply next week?
 
-6.b. What decision does this file show, and why did you make that choice?
-Answer: I decided to centralize HTTP status codes in a constants.js file. This improves code maintainability and ensures consistency across all controller handlers when returning status codes.
-
-7. What is one specific habit or process you will work on next week?
 Answer: I will work on testing my endpoints locally with curl (or similar tools) more rigorously before creating a Pull Request to catch edge cases earlier in the development process.
